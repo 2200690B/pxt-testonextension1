@@ -1,5 +1,5 @@
 //% color=#126180 icon="\uf0fb" block="Tello Drone Control"
-namespace ESP8266_IoT {
+namespace TelloDroneControl {
     enum Cmd {
         None,
         ConnectWifi,
