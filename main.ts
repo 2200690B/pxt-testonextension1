@@ -1,5 +1,43 @@
 //% color=#126180 icon="\uf0fb" block="Tello Drone Control"
-namespace TelloDroneControl {
+//% groups="['ESP8266', 'Tello']"
+namespace TelloControl {
+    // Initialize the connection variables
+    let telloIP = "192.168.10.1";
+    let commandPort = 8889;
+
+    // Command function to send UDP packets to Tello
+    function sendCommand(command: string): void {
+        serial.writeLine(`Sending command: ${command}`);
+        // Send command to ESP8266 via serial, modify this part based on your ESP8266 connection setup
+        serial.writeString("AT+CIPSEND=" + command.length + "\r\n");
+        basic.pause(100);
+        serial.writeString(command + "\r\n");
+    }
+
+    // Function to initialize Tello control mode
+    //% block="initialize Tello into SDK mode"
+    //% group="Tello"
+    export function initialize(): void {
+        sendCommand("command"); // Puts Tello into SDK mode
+        basic.pause(500);
+    }
+
+
+    //% block="land"
+    //% group="Tello"
+    export function land(): void {
+        sendCommand("land");
+    }
+
+    //% block="takeoff"
+    //% group="Tello"
+    export function takeOff(): void {
+        sendCommand("takeoff");
+    }
+
+}
+
+namespace ESP8266_IoT {
     enum Cmd {
         None,
         ConnectWifi,
@@ -47,7 +85,7 @@ namespace TelloDroneControl {
         ConnectWifi: Cmd.ConnectWifi,
         ConnectThingSpeak: Cmd.ConnectThingSpeak,
     }
-    
+
 
     let TStoSendStr = ""
 
@@ -262,5 +300,5 @@ namespace TelloDroneControl {
         return thingspeak_connected === state
     }
 
-    
+
 }
