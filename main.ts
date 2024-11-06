@@ -14,7 +14,7 @@ namespace telloControl {
         serial.redirect(tx, rx, baudRate);
         basic.pause(5000);           // Wait for connection
         // Set up UDP connection (using port 8889 for Tello)
-        sendCommand(`AT+CIPSTART="UDP","192.168.10.1",8889`);
+        sendCommand('AT+CIPSTART="UDP","192.168.10.1",8889');
         basic.pause(1000);
     }
 
@@ -54,7 +54,7 @@ namespace telloControl {
     //% block="connect ESP8266 to Tello with Wi-Fi SSID %ssid"
     //% group="Tello"
     export function connectToTello(ssid: string): void {
-        sendCommand(`AT+CWJAP="${ssid}",""`);  // Connect to Tello drone's Wi-Fi network using user input SSID
+        sendCommand('AT+CWJAP="${ssid}",""');  // Connect to Tello drone's Wi-Fi network using user input SSID
         basic.pause(5000);           // Wait for connection
 
     }
