@@ -12,9 +12,6 @@ namespace telloControl {
     //% block="initialize ESP8266 on pins TX %tx RX %rx with baud rate %baudRate"
     export function initializeESP8266(tx: SerialPin, rx: SerialPin, baudRate: BaudRate): void {
         serial.redirect(tx, rx, baudRate);
-        basic.pause(1000);
-        basic.pause(2000);           // Wait for reset
-        sendCommand("AT+RST");  // Connect to Tello drone's Wi-Fi network
         basic.pause(5000);           // Wait for connection
     }
 
